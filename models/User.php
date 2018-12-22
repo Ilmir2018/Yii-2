@@ -9,6 +9,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+/*    public $first_name;
+    public $last_name;
+    public $login;
+    public $password;
+    public $email;*/
 
     private static $users = [
         '100' => [

@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-
+use app\validators\MyValidator;
 /**
  * ContactForm is the model behind the contact form.
  */
@@ -24,11 +24,13 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
+            [['name', 'email', 'subject'], 'required', 'message' => 'Поля обязательны для заполнения'],
+            ['body', 'safe'],
             // email has to be a valid email address
-            ['email', 'email'],
+            //['email', 'email', 'message' => 'Заполните форму согласно правилам заполнения email'],
+            ['email', MyValidator::class, 'message' => 'Поле должно содержать определённые символы'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+            ['verifyCode', 'captcha', 'message' => 'Введите правильные символы!'],
         ];
     }
 
