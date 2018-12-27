@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `users`.
  */
-class m181222_091227_create_users_table extends Migration
+class m181224_115924_create_users_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -14,11 +14,11 @@ class m181222_091227_create_users_table extends Migration
     {
         $this->createTable('users', [
             'id' => $this->primaryKey(),
-            'first_name' => $this->string(255)->notNull(),
-            'last_name' => $this->string(255)->notNull(),
-            'login' => $this->string(255)->notNull(),
-            'password' => $this->string(255)->notNull(),
-            'email' => $this->string(255)->notNull()
+            'first_name' => $this->string()->notNull(),
+            'last_name' => $this->string()->notNull(),
+            'login' => $this->string()->notNull(),
+            'password' => $this->string()->notNull(),
+            'email' => $this->string()->notNull()
         ]);
         $this->createIndex("ix_users_id", "users", "id");
     }

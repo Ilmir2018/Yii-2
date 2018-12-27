@@ -8,9 +8,11 @@
 
 namespace app\controllers;
 
-
+use Yii;
 use app\models\Task;
 use yii\web\Controller;
+use app\models\filters\TasksSearch;
+
 
 class TaskController extends Controller
 {
@@ -41,9 +43,23 @@ class TaskController extends Controller
         //var_dump($model->getErrors());
         //exit;
         //var_dump(\Yii::$app->request->get());
+
+
+        /*$res = \Yii::$app->db->createCommand("
+        SELECT * FROM tasks"
+        )->queryAll();
+        var_dump($res);*/
+
+        $searchModel = new TasksSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
-            'title' => 'Yii2',
-            'content' => 'Приветствие дорогой друг! Ты начинаешь изучать Yii!'
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionTask(){
+            return $this->render('task');
     }
 }

@@ -21,15 +21,16 @@ class DbController extends Controller
         INSERT INTO test (title, content) VALUES ('dsgfdgdfsgfd', 'sfsdfdsfdf')"
         )->execute();*/
 
-        /*$res = \Yii::$app->db->createCommand("
+       /*$res = \Yii::$app->db->createCommand("
         SELECT * FROM users WHERE id = :id"
         )->bindValue(":id", 1)
             ->queryAll();
         var_dump($res);*/
 
-/*        $res = \Yii::$app->db->createCommand("
-        SELECT * FROM test"
-        )->queryAll();*/
+        /*$res = \Yii::$app->db->createCommand("
+        SELECT * FROM tasks"
+        )->queryAll();
+        var_dump($res);*/
 
 /*        $res = \Yii::$app->db->createCommand("
         SELECT id FROM test"
@@ -80,14 +81,14 @@ class DbController extends Controller
         /*$tasks = Tasks::findOne(7);
         var_dump($tasks->getTest());*/
 
-        $tasks = Tasks::find()
+        /*$tasks = Tasks::find()
             ->with("user")->all();
 
         foreach ($tasks as $task){
          var_dump($task->user->login);
-        }
+        }*/
 
- /*       $tasks = Tasks::find()->with("user")->all();
+        /*$tasks = Tasks::find()->with("user")->all();
         foreach ($tasks as $task){
             var_dump($task->getUser());
         }*/

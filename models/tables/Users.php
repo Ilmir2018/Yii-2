@@ -13,9 +13,12 @@ use Yii;
  * @property string $login
  * @property string $password
  * @property string $email
+ * @property User $user
  */
 class Users extends \yii\db\ActiveRecord
 {
+    const SCENARIO_AUTH = 'auth';
+
     /**
      * {@inheritdoc}
      */
@@ -48,5 +51,23 @@ class Users extends \yii\db\ActiveRecord
             'password' => 'Password',
             'email' => 'Email',
         ];
+    }
+    //Связываю таблицу tasks и users
+    public function getUser()
+    {
+        return $this->hasOne(Users::class,["id" => "responsible_id"]);
+    }
+
+    //Переопределяем возвращаемые поля
+    public function fields()
+    {
+        if ($this->scenario == self::SCENARIO_AUTH){
+            return [
+                'id',
+                'username' => 'login',
+                'password',
+            ];
+        }
+        return parent::fields();
     }
 }

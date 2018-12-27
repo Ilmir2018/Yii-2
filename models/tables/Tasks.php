@@ -52,9 +52,4 @@ class Tasks extends \yii\db\ActiveRecord
             'responsible_id' => 'Responsible ID',
         ];
     }
-    //Связываю таблицу tasks и users
-    public function getUser()
-    {
-        return $this->hasOne(Users::class,["id" => "responsible_id"]);
-    }
 }
