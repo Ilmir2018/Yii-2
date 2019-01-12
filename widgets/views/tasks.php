@@ -8,9 +8,9 @@
 </style>
 
 
-<a class='task' href='task'>
-    <h2><?=$data['id']?></h2>
-    <h3><?=$data['name']?></h3>
-    <p><?=$data['description']?></p>
-    <p><?=$data['date']?><p/>
+<a class='task' href="<?= \yii\helpers\Url::to(['task/task', 'id' => $model->id])?>">
+    <h2><?=$model['id']?></h2>
+    <h3><?=$model['name']?></h3>
+    <p><?=$model['description']?></p>
+    <p><?=$model['date']?><p/>
 </a>

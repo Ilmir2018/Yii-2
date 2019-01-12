@@ -11,6 +11,7 @@ use app\models\tables\Tasks;
  */
 class TasksSearch extends Tasks
 {
+
     /**
      * {@inheritdoc}
      */

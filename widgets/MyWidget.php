@@ -7,20 +7,28 @@
  */
 
 namespace app\widgets;
+use app\models\tables\Tasks;
 use yii\base\Widget;
 
 
 class MyWidget extends Widget
 {
-    public $title;
+    public $model;
 
     public function run(){
-        $tasks = \Yii::$app->db->createCommand("
+
+        if (is_a($this->model, Tasks::class)){
+            return $this->render('tasks', ['model' => $this->model]);
+        }
+        throw  new \Exception("Невозможно отобразить модель!!");
+
+
+/*        $tasks = \Yii::$app->db->createCommand("
         SELECT `name`, `description`, id, `date` FROM tasks WHERE id = {$this->title}"
         )->queryAll();
 
         foreach ($tasks as $task){
             return $this->render('tasks', ['data' => $task]);
-        }
+        }*/
     }
 }

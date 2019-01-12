@@ -13,6 +13,8 @@ use Yii;
  */
 class Test extends \yii\db\ActiveRecord
 {
+    const RUN_START = 'run_start';
+    const EVENT_RUN_COMPLETE = 'run_complete';
     /**
      * {@inheritdoc}
      */
@@ -42,5 +44,11 @@ class Test extends \yii\db\ActiveRecord
             'title' => 'Заголовок',
             'content' => 'Содержание',
         ];
+    }
+
+    public function run(){
+        $this->trigger(static::EVENT_RUN_COMPLETE);
+        echo 'Выполнение чего то там';
+        $this->trigger(static::RUN_START);
     }
 }

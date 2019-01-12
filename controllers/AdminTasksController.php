@@ -2,9 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\tables\Test;
+use app\models\tables\Users;
 use Yii;
 use app\models\tables\Tasks;
 use app\models\filters\TasksSearch;
+use yii\base\Event;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,8 +74,16 @@ class AdminTasksController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $handler_2 = function (){
+            echo 'Email отправился!)';
+        };
+
+       $event = Event::on(Tasks::class, Tasks::RUN_EMAIL, $handler_2);
+
         return $this->render('create', [
             'model' => $model,
+            'userList' => Users::getUsersList(),
+            'event' => $event
         ]);
     }
 

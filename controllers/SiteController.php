@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\actions\HelloAction;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -44,6 +45,9 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+            'hello' => [
+                'class' => HelloAction::class
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],

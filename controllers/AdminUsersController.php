@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\models\filters\UsersSearch;
+use app\models\tables\Tasks;
 use Yii;
 use app\models\tables\Users;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,6 +74,7 @@ class AdminUsersController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'taskList' => Tasks::getTasksList()
         ]);
     }
 

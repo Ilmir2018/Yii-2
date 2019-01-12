@@ -18,13 +18,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <? echo $form->field($model, 'responsible_id')->dropdownList(
-        \app\models\filters\TasksSearch::find()->select(['responsible_id'])->indexBy('responsible_id')->column(),
-        ['prompt'=>'Выбрать роль']
-    );?>
+    <? echo $form->field($model, 'responsible_id')->dropdownList($usersList);?>
+
+    <?=$event?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']);?>
     </div>
 
     <?php ActiveForm::end(); ?>

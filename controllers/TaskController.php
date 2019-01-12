@@ -8,10 +8,9 @@
 
 namespace app\controllers;
 
-use Yii;
-use app\models\Task;
+use app\models\tables\Tasks;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use app\models\filters\TasksSearch;
 
 
 class TaskController extends Controller
@@ -50,16 +49,19 @@ class TaskController extends Controller
         )->queryAll();
         var_dump($res);*/
 
-        $searchModel = new TasksSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       // $searchModel = new TasksSearch();
+        $dataProvider = new ActiveDataProvider([
+            'query' => Tasks::find()
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+           // 'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionTask(){
-            return $this->render('task');
+    public function actionTask($id)
+    {
+        var_dump($id);
     }
 }

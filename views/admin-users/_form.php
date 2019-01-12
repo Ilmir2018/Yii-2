@@ -22,10 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <? echo $form->field($model, 'role_id')->dropdownList(
-        \app\models\filters\UsersSearch::find()->select(['role_id'])->indexBy('role_id')->column(),
-        ['prompt'=>'Выбрать роль']
-    );?>
+    <? echo $form->field($model, 'role_id')->dropdownList($tasksList);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
