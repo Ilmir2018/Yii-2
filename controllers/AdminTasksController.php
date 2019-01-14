@@ -74,16 +74,9 @@ class AdminTasksController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $handler_2 = function (){
-            echo 'Email отправился!)';
-        };
-
-       $event = Event::on(Tasks::class, Tasks::RUN_EMAIL, $handler_2);
-
         return $this->render('create', [
             'model' => $model,
-            'userList' => Users::getUsersList(),
-            'event' => $event
+            'userList' => Users::getUsersList()
         ]);
     }
 
@@ -104,6 +97,7 @@ class AdminTasksController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'userList' => Users::getUsersList()
         ]);
     }
 

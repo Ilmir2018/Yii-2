@@ -4,6 +4,8 @@ namespace app\models\tables;
 
 use app\models\User;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -18,14 +20,22 @@ use yii\helpers\ArrayHelper;
  */
 class Tasks extends \yii\db\ActiveRecord
 {
-
-    const RUN_EMAIL = 'email';
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'tasks';
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'value' => new Expression('NOW()')
+            ]
+        ];
     }
 
     /**
@@ -56,21 +66,18 @@ class Tasks extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getTasksList(){
+    public static function getTasksList()
+    {
         $tasks = Tasks::find()
             ->select(['id', 'name'])
             ->asArray()
             ->all();
 
-        return  ArrayHelper::map($tasks, 'id', 'name');
+        return ArrayHelper::map($tasks, 'id', 'name');
     }
 
-    public function getResponsible(){
+    public function getResponsible()
+    {
         return $this->hasOne(Users::class, ['id' => 'responsible_id']);
-    }
-
-    public function run(){
-        $this->trigger(static::RUN_EMAIL);
-        echo 'Отправка email!!!';
     }
 }
