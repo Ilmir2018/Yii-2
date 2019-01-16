@@ -7,7 +7,6 @@
     }
 </style>
 
-
 <a class='task' href="<?= \yii\helpers\Url::to(['task/task', 'id' => $model->id])?>">
     <h2><?=$model['id']?></h2>
     <h3><?=$model['name']?></h3>
