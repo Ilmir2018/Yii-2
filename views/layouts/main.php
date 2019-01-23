@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -21,7 +22,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <link rel="stylesheet" href="/css/task.css"> <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -42,8 +43,12 @@ AppAsset::register($this);
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Hello', 'url' => ['/site/hello']],
+            ['label' => 'Lang', 'items' => [
+                ['label' => 'ru', 'url' => ['site/lang', 'lang' => 'ru']],
+                ['label' => 'en', 'url' => ['site/lang', 'lang' => 'en']]
+            ]],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')

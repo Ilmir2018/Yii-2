@@ -65,6 +65,13 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionLang($lang)
+    {
+        $session = Yii::$app->session;
+        $session->set('lang', $lang);
+        $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Displays homepage.
      *

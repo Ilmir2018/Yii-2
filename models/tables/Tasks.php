@@ -49,6 +49,8 @@ class Tasks extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['responsible_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
+            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TaskStatuses::className(), 'targetAttribute' => ['status' => 'id']],
+            [['responsible_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['responsible_id' => 'id']],
         ];
     }
 
@@ -59,10 +61,13 @@ class Tasks extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => Yii::t('main', 'task_name'),
             'date' => 'Date',
-            'description' => 'Description',
+            'description' => Yii::t('main', 'task_description'),
             'responsible_id' => 'Responsible ID',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'status' => 'Status',
         ];
     }
 
@@ -76,8 +81,29 @@ class Tasks extends \yii\db\ActiveRecord
         return ArrayHelper::map($tasks, 'id', 'name');
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTaskAttachments()
+    {
+        return $this->hasMany(TaskAttachments::className(), ['task_id' => 'id']);
+    }
+
     public function getResponsible()
     {
         return $this->hasOne(Users::class, ['id' => 'responsible_id']);
+    }
+
+    public function getTaskComments()
+    {
+        return $this->hasMany(TaskComments::className(), ['task_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(TaskStatuses::className(), ['id' => 'status']);
     }
 }

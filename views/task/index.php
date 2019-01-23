@@ -1,13 +1,3 @@
-
-<?php
-use yii\helpers\Html;
-use yii\grid\GridView;
-?>
-
-<p>
-    <?= Html::a('Create Tasks', ['create'], ['class' => 'btn btn-success']) ?>
-</p>
-
 <?php
 
 $model = \app\models\tables\Tasks::findOne(2);
@@ -19,5 +9,8 @@ echo \yii\widgets\ListView::widget([
     'itemView' => function($model){
         return \app\widgets\MyWidget::widget(['model' => $model]);
     },
-    'summary' => false
+    'summary' => false,
+    'options' => [
+        'class' => 'preview-container'
+    ]
 ]);

@@ -10,8 +10,22 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@img'   => '@app/web/img'
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
     ],
     'components' => [
+        'i18n' => [
+            'translations' => [
+                'main*' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@app/messages'
+                ]
+            ]
+        ],
         'bootstrap' => [
             'class' => \app\components\Bootstrap::class
         ],
@@ -49,8 +63,19 @@ $config = [
 
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                'task' => 'task',
+                'task/<id>' => 'task/one',
+                'task-save/<id>' => 'task/save',
+                'admin/tasks' => 'admin/tasks',
+                'admin/users' => 'admin/users',
+                'site/index' => 'site/index',
+                'site/about' => 'site/about',
+                'site/contact' => 'site/contact',
+                'site/logout' => 'site/logout',
+                'site/login' => 'site/login',
             ],
         ],
 

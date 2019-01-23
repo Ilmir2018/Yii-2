@@ -1,6 +1,5 @@
 <?php
-
 return [
-    'error' => 'Catch error!! Num: {number}',
-    'login' => 'please login!'
+    'task_name' => 'Title',
+    'task_description' => 'Description'
 ];
