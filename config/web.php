@@ -18,6 +18,9 @@ $config = [
         ],
     ],
     'components' => [
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::class,
+        ],
         'i18n' => [
             'translations' => [
                 'main*' => [
@@ -64,19 +67,22 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => true,
-            'rules' => [
-                'task' => 'task',
-                'task/<id>' => 'task/one',
-                'task-save/<id>' => 'task/save',
-                'admin/tasks' => 'admin/tasks',
-                'admin/users' => 'admin/users',
-                'site/index' => 'site/index',
-                'site/about' => 'site/about',
-                'site/contact' => 'site/contact',
-                'site/logout' => 'site/logout',
-                'site/login' => 'site/login',
-            ],
+            // 'enableStrictParsing' => true,
+//            'rules' => [
+//                'task' => 'task',
+//                'task/<id>' => 'task/one',
+//                'task-save/<id>' => 'task/save',
+//                'admin/tasks' => 'admin/tasks',
+//                'admin/users' => 'admin/users',
+//                'site/index' => 'site/index',
+//                'site/about' => 'site/about',
+//                'site/contact' => 'site/contact',
+//                'site/logout' => 'site/logout',
+//                'site/login' => 'site/login',
+//                'admin-tasks' => 'admin-tasks',
+//                'admin-tasks/create' => 'admin-tasks/create',
+//                'admin-tasks/view/<id>' => 'admin-tasks/view/<id>'
+//            ],
         ],
 
     ],

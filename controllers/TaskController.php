@@ -15,6 +15,7 @@ use app\models\tables\TaskStatuses;
 use app\models\tables\Users;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -35,14 +36,24 @@ class TaskController extends Controller
 
     public function actionOne($id){
 
-        return $this->render('one', [
-            'model' => Tasks::findOne($id),
-            'usersList' => Users::getUsersList(),
-            'statusesList' => TaskStatuses::getList(),
-            'userId' => \Yii::$app->user->id,
-            'taskCommentForm' => new TaskComments(),
-            'taskAttachmentForm' => new TaskAttachmentsAddForm(),
-        ]);
+//        if(!\Yii::$app->user->can('TaskDelete')) {
+//            throw new ForbiddenHttpException();
+//        }
+        if (\Yii::$app->user->can('CommentAdd') && \Yii::$app->user->can('FileAdd')) {
+            return $this->render('one', [
+                'model' => Tasks::findOne($id),
+                'usersList' => Users::getUsersList(),
+                'statusesList' => TaskStatuses::getList(),
+                'userId' => \Yii::$app->user->id,
+                'taskCommentForm' => new TaskComments(),
+                'taskAttachmentForm' => new TaskAttachmentsAddForm(),]);
+        }else{
+            return $this->render('two', [
+                'model' => Tasks::findOne($id),
+                'usersList' => Users::getUsersList(),
+                'statusesList' => TaskStatuses::getList(),
+                'userId' => \Yii::$app->user->id]);
+        }
     }
 
     public function actionSave($id)

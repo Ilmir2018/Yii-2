@@ -9,9 +9,11 @@
 namespace app\commands;
 
 
+use app\models\tables\Tasks;
 use app\models\tables\Users;
 use yii\console\Controller;
 use yii\console\ExitCode;
+use yii\db\ActiveQuery;
 use yii\helpers\Console;
 
 class TaskController extends Controller
@@ -50,11 +52,25 @@ class TaskController extends Controller
         return ['m' => 'message'];
     }
 
-    public function actionDedline($userId)
+    public function actionDeadline($userId)
     {
-        $time = Users::find()
-            ->where(['id' => $userId])
+        //Получаем набор тасков.
+        //with - это жадная загрузка
+        /**
+         * @var Tasks[] $tasks
+         */
+        $tasks = Tasks::find()
+            ->where('DATEDIFF(NOW(), tasks.date) <= 1')
+            ->with('responsible')
             ->all();
-        var_dump($time);
+
+        foreach ($tasks as $task){
+            \Yii::$app->mailer->compose()
+                ->setTo($task->responsible->email)
+                ->setFrom("admin@mail.ru")
+                ->setSubject("TaskDeadline")
+                ->setTextBody("У вас осталось мало времени!!!")
+                ->send();
+        }
     }
 }

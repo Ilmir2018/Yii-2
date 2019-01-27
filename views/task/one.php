@@ -8,6 +8,8 @@
 use \yii\widgets\ActiveForm;
 use \yii\helpers\Url;
 use \yii\helpers\Html;
+
+\app\assets\TaskOneAsset::register($this);
 ?>
 
 <div class="task-edit">
@@ -25,7 +27,11 @@ use \yii\helpers\Html;
             </div>
             <div class="col-lg-4">
                 <?=$form->field($model, 'date')
-                    ->textInput(['type' => 'date'])?>
+//                ->widget(\yii\jui\DatePicker::class, [
+//                        'language' => 'ru'
+//                ])
+                   ->textInput(['type' => 'date'])
+                ?>
             </div>
         </div>
         <div>
@@ -34,6 +40,7 @@ use \yii\helpers\Html;
         </div>
         <?=Html::submitButton("Сохранить",['class' => 'btn btn-success']);?>
         <?ActiveForm::end()?>
+        <button id="push-me-btn" class="btn btn-success">Push me!</button>
     </div>
 </div>
 <div class="attachments">
@@ -72,5 +79,3 @@ use \yii\helpers\Html;
         </div>
     </div>
 </div>
-
-

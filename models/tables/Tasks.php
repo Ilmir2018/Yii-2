@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property string $description
  * @property int $responsible_id
  * @property User $user
+ * @property Users $responsible
  */
 class Tasks extends \yii\db\ActiveRecord
 {
